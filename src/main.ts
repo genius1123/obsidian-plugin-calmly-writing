@@ -30,10 +30,6 @@ export default class OpenVSCode extends Plugin {
 	settings: OpenVSCodeSettings;
 
 	async onload() {
-		console.log('====================================');
-		console.log("calmly-writing");
-		console.log('====================================');
-		console.log('Loading ' + this.manifest.name + ' plugin');
 		this.addSettingTab(new OpenVSCodeSettingsTab(this.app, this));
 		await this.loadSettings();
 
