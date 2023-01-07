@@ -60,18 +60,6 @@ export default class OpenVSCode extends Plugin {
 
 		this.refreshIconRibbon();
 
-		this.addCommand({
-			id: 'open-vscode',
-			name: 'Open as Visual Studio Code workspace',
-			callback: this.openVSCode.bind(this),
-		});
-
-		this.addCommand({
-			id: 'open-vscode-via-url',
-			name: 'Open as Visual Studio Code workspace using a vscode:// URL',
-			callback: this.openVSCodeUrl.bind(this),
-		});
-
 		DEV =
 			(this.app as AppWithPlugins).plugins.enabledPlugins.has('hot-reload') &&
 			!!(this.app as AppWithPlugins).plugins.plugins['hot-reload']?.enabledPlugins.has(this.manifest.id);
@@ -89,6 +77,17 @@ export default class OpenVSCode extends Plugin {
 				callback: this.resetSettings.bind(this),
 			});
 		}
+
+		// const appContainer = document.querySelector(".app-container")
+		// console.log('appContainer',appContainer)
+		// const p = document.createElement("p");  //创建段落节点
+		// const txt = document.createTextNode("盒模型");  //创建文本节点，文本内容为“盒模型”
+		// p.appendChild(txt);  //把文本节点增加到段落节点中
+
+		// appContainer?.appendChild(p)
+		// console.log('appContainer',appContainer)
+
+		document.onkeydown = (e) => { this.window_onkeydown(e); }
 	}
 
 	async openVSCode() {
@@ -182,16 +181,6 @@ export default class OpenVSCode extends Plugin {
 		}
 	};
 
-	/**
-	 * [pjeby](https://forum.obsidian.md/t/how-to-get-started-with-developing-a-custom-plugin/8157/7)
-	 *
-	 * > ...while doing development, you may need to reload your plugin
-	 * > after making changes. You can do this by reloading, sure, but it’s easier
-	 * > to just go to settings and then toggle the plugin off, then back on again.
-	 * >
-	 * > You can also automate this process from within the plugin itself, by
-	 * > including a command that does something like this:
-	 */
 	async reload() {
 		const id = this.manifest.id;
 		const plugins = (this.app as AppWithPlugins).plugins;
@@ -205,13 +194,4 @@ export default class OpenVSCode extends Plugin {
 		this.settings = DEFAULT_SETTINGS;
 		await this.saveData(this.settings);
 	}
-}
-
-// https://stackoverflow.com/questions/1144783/how-to-replace-all-occurrences-of-a-string-in-javascript
-function escapeRegExp(string: string) {
-	return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-}
-
-function replaceAll(str: string, find: string, replace: string) {
-	return str.replace(new RegExp(escapeRegExp(find), 'g'), replace);
 }
