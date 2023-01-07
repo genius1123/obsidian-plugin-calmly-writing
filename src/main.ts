@@ -30,6 +30,31 @@ export default class OpenVSCode extends Plugin {
 	settings: OpenVSCodeSettings;
 
 	async onload() {
+		console.log('====================================');
+		console.log('====================================');
+		console.log('====================================');
+		console.log('====================================');
+		console.log('====================================');
+		console.log('====================================');
+		console.log('====================================');
+		console.log('====================================');
+		console.log('====================================');
+		console.log('====================================');
+		console.log('====================================');
+		console.log('====================================');
+		console.log('====================================');
+		console.log('====================================');
+		console.log('====================================');
+		console.log('====================================');
+		console.log('====================================');
+		console.log('====================================');
+		console.log('====================================');
+		console.log('====================================');
+		console.log('====================================');
+		console.log('====================================');
+		console.log('====================================');
+		console.log('====================================');
+		console.log('====================================');
 		this.addSettingTab(new OpenVSCodeSettingsTab(this.app, this));
 		await this.loadSettings();
 
@@ -49,7 +74,7 @@ export default class OpenVSCode extends Plugin {
 
 		DEV =
 			(this.app as AppWithPlugins).plugins.enabledPlugins.has('hot-reload') &&
-			(this.app as AppWithPlugins).plugins.plugins['hot-reload'].enabledPlugins.has(this.manifest.id);
+			!!(this.app as AppWithPlugins).plugins.plugins['hot-reload']?.enabledPlugins.has(this.manifest.id);
 
 		if (DEV) {
 			this.addCommand({
