@@ -100,7 +100,6 @@ export default class OpenVSCode extends Plugin {
 		const file = this.app.workspace.getActiveFile();
 		const filePath = file?.path ?? '';
 
-		// eslint-disable-next-line @typescript-eslint/no-var-requires
 		const { exec } = require('child_process');
 
 		let command = executeTemplate.trim() === '' ? DEFAULT_SETTINGS.executeTemplate : executeTemplate;
@@ -130,33 +129,19 @@ export default class OpenVSCode extends Plugin {
 				filePath,
 			});
 
-		// https://code.visualstudio.com/docs/editor/command-line#_opening-vs-code-with-urls
 		const protocol = useUrlInsiders ? 'vscode-insiders://' : 'vscode://';
 		let url = `${protocol}file/${path}`;
 
 		if (openFile) {
 			url += `/${filePath}`;
-			/*
-			By default, opening a file via the vscode:// URL will cause that file to open
-			in the front-most window in VSCode. We assume that it is preferred that files from
-			Obsidian should all open in the same workspace.
 
-			As a workaround, we issue two open requests to VSCode in quick succession: the first to
-			bring the workspace to front, the second to open the file.
-
-			There is a ticket requesting this feature for VSCode:
-			https://github.com/microsoft/vscode/issues/150078
-			*/
-
-			// HACK: first open the _workspace_ to bring the correct window to the front....
 			const workspacePath = replaceAll(this.settings.workspacePath, '{{vaultpath}}', path);
 			window.open(`vscode://file/${workspacePath}`);
 
-			// ...then open the _file_ in a setTimeout callback to allow time for the workspace to be activated
 			setTimeout(() => {
 				if (DEV) console.log('[openVSCode]', { url });
 				window.open(url);
-			}, 200); // anecdotally, this seems to be the min required for the workspace to activate
+			}, 200);
 		} else {
 			if (DEV) console.log('[openVSCode]', { url });
 			window.open(url);
