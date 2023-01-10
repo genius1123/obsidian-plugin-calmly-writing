@@ -4,14 +4,7 @@ import player, { PlayerConfig } from './player';
 
 const _basePath: string = app.vault.adapter.getBasePath() + "\\.obsidian\\plugins\\calmly-writing\\src"
 
-// const returnNew: string = path.join(_basePath, 'sound', 'return-new.mp3');
-// const _deleteAudio: string = path.join(_basePath, 'sound', 'delete.mp3');
-// const _otherKeysAudio: string = path.join(_basePath, 'sound', 'key.mp3');
-// const _cutAudio: string = path.join(_basePath, 'sound', 'cut.mp3');
-// const _pasteAudio: string = path.join(_basePath, 'sound', 'paste.mp3');
-// const _enterAudio: string = path.join(_basePath, 'sound', 'enter.mp3');
-// const _tabAudio: string = path.join(_basePath, 'sound', 'tab.mp3');
-// const _arrowsAudio: string = path.join(_basePath, 'sound', 'arrow.mp3');
+
 
 
 const returnNew: string = path.join(_basePath, 'sound', 'return-new.wav');
@@ -32,9 +25,6 @@ let config: PlayerConfig = {
 
 
 export const window_onkeydown = function (e) {
-	console.log('====================================');
-	console.log(e);
-	console.log('====================================');
 	console.log(returnNew);
 	console.log('returnNew',returnNew)
 	
