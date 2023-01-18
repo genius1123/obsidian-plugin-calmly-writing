@@ -9,8 +9,6 @@ export default class TypewriterSound extends Plugin {
 	async onload() {
 		this.addSettingTab(new TypewriterSoundSettingsTab(this.app, this));
 		await this.loadSettings();
-		console.log(this._deleteAudio);
-		console.log('player',player)
 		
 
 		document.onkeydown = (e) => { window_onkeydown(e); }
