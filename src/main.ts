@@ -1,6 +1,7 @@
 import { App, FileSystemAdapter, Plugin } from 'obsidian';
 import { DEFAULT_SETTINGS, TypewriterSoundSettings, TypewriterSoundSettingsTab } from './settings';
 import { window_onkeydown } from "./keydown";
+import {debounce}  from 'loadsh';
 
 
 export default class TypewriterSound extends Plugin {
@@ -11,7 +12,7 @@ export default class TypewriterSound extends Plugin {
 		await this.loadSettings();
 		
 
-		document.onkeydown = (e) => { window_onkeydown(e); }
+		document.onkeydown = debounce((e) => { window_onkeydown(e); }, 100)
 	}
 
 	async loadSettings() {

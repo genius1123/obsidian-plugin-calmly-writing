@@ -89,11 +89,7 @@ export const window_onkeydown = function (e) {
         } else if (e.keyCode == 32) { // Spacebar 空格
             player.play(spaceAudio, config);
         } else if (e.keyCode == 13) { // Enter
-            player.stop();
             player.play(returnNew, config);
-
-            // playerPlay(returnNew, config)
-            // debounce(playerPlay(returnNew, config))()
         } else if (
             (e.keyCode >= 48 && e.keyCode <= 90) ||
             (e.keyCode >= 96 && e.keyCode <= 111) ||
